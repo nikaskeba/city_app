@@ -12,7 +12,7 @@ function CityExplorer() {
 
   const getWeatherData = async (lat, lon) => {
     try {
-      const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/.netlify/functions/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
+      const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/functions/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
       const response = await fetch(weatherEndpoint);
 
       if (!response.ok) {
@@ -87,10 +87,22 @@ function CityExplorer() {
         </div>
       )}
  {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      {weatherData && !errorMessage && (
-        <Weather forecastData={weatherData} />
-      )}
-    </div>
+
+    {/* Show the map, latitude, longitude based on the latitude and longitude state alone */}
+    {latitude && longitude && (
+      <div>
+        <p>Latitude: {latitude}</p>
+        <p>Longitude: {longitude}</p>
+        {mapUrl && <img src={mapUrl} alt="Location Map" />}
+      </div>
+    )}
+
+    {weatherErrorMessage && <p style={{ color: 'red' }}>{weatherErrorMessage}</p>}
+    
+    {weatherData && (
+      <Weather forecastData={weatherData} />
+    )}
+  </div>
   );
 }
 

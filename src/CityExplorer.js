@@ -72,7 +72,7 @@ return (
     ...
     {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-    // Step 3: Show the map, latitude, longitude based on the latitude and longitude state alone
+    {/* Show the map, latitude, longitude based on the latitude and longitude state alone */}
     {latitude && longitude && (
       <div>
         <p>Latitude: {latitude}</p>
@@ -88,6 +88,7 @@ return (
     )}
   </div>
 );
+
 
 
 

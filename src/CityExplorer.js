@@ -12,7 +12,7 @@ function CityExplorer() {
 
   const getWeatherData = async (lat, lon) => {
     try {
-      const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
+      const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/.netlify/functions/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
       const response = await fetch(weatherEndpoint);
 
       if (!response.ok) {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Weather from './Weather';
 
 function CityExplorer() {
   const [city, setCity] = useState('');
@@ -6,17 +7,24 @@ function CityExplorer() {
   const [longitude, setLongitude] = useState(null);
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [weatherData, setWeatherData] = useState(null); // New state for weather data
+  const [weatherData, setWeatherData] = useState(null);
 
-  const fetchWeather = async (lat, lon) => {
+  const getWeatherData = async (lat, lon) => {
     try {
-      const response = await fetch(`/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`);
+      const weatherEndpoint = `/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
+      const response = await fetch(weatherEndpoint);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather data.');
+      }
+
       const data = await response.json();
       setWeatherData(data);
     } catch (error) {
-      console.error("Error fetching weather:", error);
+      setErrorMessage(error.message);
+      console.error("Error fetching weather data:", error);
     }
-  }
+  };
 
   const handleExplore = async () => {
     const searchEndpoint = 'https://us1.locationiq.com/v1/search.php'; 
@@ -41,12 +49,13 @@ function CityExplorer() {
         setLatitude(lat);
         setLongitude(lon);
 
-        // Fetch weather data
-        fetchWeather(lat, lon);
-
+        // Construct the static map URL
         const staticMapEndpoint = 'https://maps.locationiq.com/v3/staticmap';
         const staticMapUrl = `${staticMapEndpoint}?key=${apiKey}&center=${lat},${lon}&zoom=13&size=400x400&format=png`;
         setMapUrl(staticMapUrl);
+
+        // Fetch the weather data
+        getWeatherData(lat, lon);
       } else {
         throw new Error('No results found.');
       }
@@ -74,13 +83,11 @@ function CityExplorer() {
           <p>Latitude: {latitude}</p>
           <p>Longitude: {longitude}</p>
           {mapUrl && <img src={mapUrl} alt="Location Map" />}
-          {/* Display weather data if available */}
-          {weatherData && <div>
-            {weatherData.map((forecast, index) => (
-              <p key={index}>{forecast.date}: {forecast.description}</p>
-            ))}
-          </div>}
         </div>
+      )}
+
+      {weatherData && !errorMessage && (
+        <Weather forecastData={weatherData} />
       )}
     </div>
   );

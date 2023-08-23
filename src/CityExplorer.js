@@ -7,7 +7,7 @@ function CityExplorer() {
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-
+const [weatherErrorMessage, setWeatherErrorMessage] = useState('');
 
 
   const getWeatherData = async (lat, lon) => {
@@ -22,7 +22,7 @@ function CityExplorer() {
       const data = await response.json();
       setWeatherData(data);
     } catch (error) {
-      setErrorMessage(error.message);
+      setWeatherErrorMessage(error.message);
       console.error("Error fetching weather data:", error);
     }
   };
@@ -67,31 +67,32 @@ function CityExplorer() {
     }
   };
 
-  return (
-    <div>
-      <input 
-        type="text" 
-        value={city} 
-        onChange={e => setCity(e.target.value)} 
-        placeholder="Enter city or landmark..."
-      />
-      <button onClick={handleExplore}>Explore!</button>
+return (
+  <div>
+    ...
+    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+    // Step 3: Show the map, latitude, longitude based on the latitude and longitude state alone
+    {latitude && longitude && (
+      <div>
+        <p>Latitude: {latitude}</p>
+        <p>Longitude: {longitude}</p>
+        {mapUrl && <img src={mapUrl} alt="Location Map" />}
+      </div>
+    )}
 
-      {latitude && longitude && !errorMessage && (
-        <div>
-          <p>Latitude: {latitude}</p>
-          <p>Longitude: {longitude}</p>
-          {mapUrl && <img src={mapUrl} alt="Location Map" />}
-        </div>
-      )}
+    {weatherErrorMessage && <p style={{ color: 'red' }}>{weatherErrorMessage}</p>}
+    
+    {weatherData && (
+      <Weather forecastData={weatherData} />
+    )}
+  </div>
+);
 
-      {weatherData && !errorMessage && (
-        <Weather forecastData={weatherData} />
-      )}
-    </div>
-  );
+
+
+
+
 }
 
 

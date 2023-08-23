@@ -95,4 +95,4 @@ function CityExplorer() {
 
 
 export default CityExplorer;
-module.exports.handler = serverlessHttp(app);
+

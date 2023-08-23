@@ -7,12 +7,12 @@ function CityExplorer() {
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app//weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
+
 
 
   const getWeatherData = async (lat, lon) => {
     try {
-      const weatherEndpoint = `/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
+      const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
       const response = await fetch(weatherEndpoint);
 
       if (!response.ok) {

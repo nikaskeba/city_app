@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Weather from './weather';
-const weatherEndpoint = `https://your-backend-url.com/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
 function CityExplorer() {
   const [city, setCity] = useState('');
   const [latitude, setLatitude] = useState(null);
@@ -8,6 +7,7 @@ function CityExplorer() {
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState(null);
+const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app//weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
 
 
   const getWeatherData = async (lat, lon) => {

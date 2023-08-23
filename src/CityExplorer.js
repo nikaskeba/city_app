@@ -7,7 +7,7 @@ function CityExplorer() {
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-const [weatherErrorMessage, setWeatherErrorMessage] = useState('');
+
 
 
   const getWeatherData = async (lat, lon) => {
@@ -22,7 +22,7 @@ const [weatherErrorMessage, setWeatherErrorMessage] = useState('');
       const data = await response.json();
       setWeatherData(data);
     } catch (error) {
-      setWeatherErrorMessage(error.message);
+      setErrorMessage(error.message);
       console.error("Error fetching weather data:", error);
     }
   };
@@ -67,33 +67,31 @@ const [weatherErrorMessage, setWeatherErrorMessage] = useState('');
     }
   };
 
-return (
-  <div>
-    ...
-    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+  return (
+    <div>
+      <input 
+        type="text" 
+        value={city} 
+        onChange={e => setCity(e.target.value)} 
+        placeholder="Enter city or landmark..."
+      />
+      <button onClick={handleExplore}>Explore!</button>
 
-    {/* Show the map, latitude, longitude based on the latitude and longitude state alone */}
-    {latitude && longitude && (
-      <div>
-        <p>Latitude: {latitude}</p>
-        <p>Longitude: {longitude}</p>
-        {mapUrl && <img src={mapUrl} alt="Location Map" />}
-      </div>
-    )}
+     
 
-    {weatherErrorMessage && <p style={{ color: 'red' }}>{weatherErrorMessage}</p>}
-    
-    {weatherData && (
-      <Weather forecastData={weatherData} />
-    )}
-  </div>
-);
-
-
-
-
-
-
+      {latitude && longitude && !errorMessage && (
+        <div>
+          <p>Latitude: {latitude}</p>
+          <p>Longitude: {longitude}</p>
+          {mapUrl && <img src={mapUrl} alt="Location Map" />}
+        </div>
+      )}
+ {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {weatherData && !errorMessage && (
+        <Weather forecastData={weatherData} />
+      )}
+    </div>
+  );
 }
 
 

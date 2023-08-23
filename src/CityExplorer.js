@@ -80,7 +80,13 @@ const [weatherErrorMessage, setWeatherErrorMessage] = useState('');
 
      
 
- 
+      {latitude && longitude && !errorMessage && (
+        <div>
+      
+        </div>
+      )}
+ {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+
     {/* Show the map, latitude, longitude based on the latitude and longitude state alone */}
     {latitude && longitude && (
       <div>

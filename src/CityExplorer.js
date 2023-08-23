@@ -7,7 +7,7 @@ function CityExplorer() {
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-
+const [weatherErrorMessage, setWeatherErrorMessage] = useState('');
 
 
   const getWeatherData = async (lat, lon) => {
@@ -22,9 +22,10 @@ function CityExplorer() {
       const data = await response.json();
       setWeatherData(data);
     } catch (error) {
-      setErrorMessage(error.message);
-      console.error("Error fetching weather data:", error);
-    }
+    // Step 2: Use setWeatherErrorMessage instead of setErrorMessage
+    setWeatherErrorMessage(error.message);
+    console.error("Error fetching weather data:", error);
+  }
   };
 
   const handleExplore = async () => {

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-const [errorMessage, setErrorMessage] = useState('');
+
 
 function CityExplorer() {
   const [city, setCity] = useState('');
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [mapUrl, setMapUrl] = useState(null);
-
-const handleExplore = async () => {
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleExplore = async () => {
   const searchEndpoint = 'https://us1.locationiq.com/v1/search.php'; 
   const apiKey = process.env.REACT_APP_LOCATIONIQ_API_KEY;
 

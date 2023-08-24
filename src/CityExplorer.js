@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Weather from './weather';
 import axios from 'axios';
 
 function CityExplorer() {
@@ -43,22 +42,7 @@ const getMoviesFilmedInCity = async () => {
     console.error("Error fetching movies:", error);
   }
 };
-  const getWeatherData = async (lat, lon) => {
-    try {
-      const weatherEndpoint = `/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
-      const response = await fetch(weatherEndpoint);
 
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch weather data.');
-      }
-
-      const data = await response.json();
-     
-    } catch (error) {
-      setErrorMessage(error.message);
-      console.error("Error fetching weather data:", error);
-    }
   };
 
   const handleExplore = async () => {
@@ -72,7 +56,7 @@ const getMoviesFilmedInCity = async () => {
         throw new Error('Unable to load. Authentication error.');
       }
 
-      const data = await response.json();
+   
 
       if (!response.ok) {
         throw new Error(data.error || 'Unable to load.');

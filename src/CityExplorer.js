@@ -8,7 +8,7 @@ function CityExplorer() {
   const [longitude, setLongitude] = useState(null);
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
+
   const [latestWeather, setLatestWeather] = useState(null);
 
 const [movies, setMovies] = useState([]);
@@ -89,8 +89,7 @@ const getMoviesFilmedInCity = async () => {
         const staticMapUrl = `${staticMapEndpoint}?key=${apiKey}&center=${lat},${lon}&zoom=13&size=400x400&format=png`;
         setMapUrl(staticMapUrl);
   
-        // Fetch the weather data
-        getWeatherData(lat, lon);
+
         // Fetch top 5 movies filmed in the city
   getMoviesFilmedInCity();
       } else {
@@ -142,9 +141,7 @@ const getMoviesFilmedInCity = async () => {
         </ul>
       </div>
     )}
-      {weatherData && !errorMessage && (
-        <Weather forecastData={weatherData} />
-      )}
+  
     <div>
        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}</div>
     </div>

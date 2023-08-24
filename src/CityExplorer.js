@@ -70,10 +70,11 @@ const getMoviesFilmedInCity = async () => {
         const staticMapEndpoint = 'https://maps.locationiq.com/v3/staticmap';
         const staticMapUrl = `${staticMapEndpoint}?key=${apiKey}&center=${lat},${lon}&zoom=13&size=400x400&format=png`;
         setMapUrl(staticMapUrl);
-  // Fetch top 5 movies filmed in the city
-  getMoviesFilmedInCity();
+  
         // Fetch the weather data
         getWeatherData(lat, lon);
+        // Fetch top 5 movies filmed in the city
+  getMoviesFilmedInCity();
       } else {
         throw new Error('No results found.');
       }
@@ -101,7 +102,9 @@ const getMoviesFilmedInCity = async () => {
           <p>Latitude: {latitude}</p>
           <p>Longitude: {longitude}</p>
           {mapUrl && <img src={mapUrl} alt="Location Map" />}
+
         </div>
+
       )}
  {movies && movies.length > 0 && (
       <div>

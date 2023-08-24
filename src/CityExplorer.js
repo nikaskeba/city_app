@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Weather from './weather';
+import axios from 'axios';
 
 function CityExplorer() {
   const [city, setCity] = useState('');
@@ -8,7 +9,24 @@ function CityExplorer() {
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState(null);
+  const [latestWeather, setLatestWeather] = useState(null);
+
 const [movies, setMovies] = useState([]);
+const getLatestWeatherData = async (lat, lon) => {
+  try {
+    const weatherEndpoint = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${process.env.REACT_APP_WEATHERBIT_API_KEY}`;
+    const response = await axios.get(weatherEndpoint);
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch weather data.');
+    }
+
+    const weatherData = response.data.data[0];  // Weatherbit's current weather endpoint returns an array
+    setLatestWeather(weatherData);
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+  }
+};
 const getMoviesFilmedInCity = async () => {
   try {
     const movieEndpoint = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${city}`;
@@ -65,7 +83,7 @@ const getMoviesFilmedInCity = async () => {
         const lon = data[0].lon;
         setLatitude(lat);
         setLongitude(lon);
-
+ getLatestWeatherData(lat, lon);
         // Construct the static map URL
         const staticMapEndpoint = 'https://maps.locationiq.com/v3/staticmap';
         const staticMapUrl = `${staticMapEndpoint}?key=${apiKey}&center=${lat},${lon}&zoom=13&size=400x400&format=png`;
@@ -106,6 +124,14 @@ const getMoviesFilmedInCity = async () => {
         </div>
 
       )}
+         {latestWeather && (
+      <div>
+        <h3>Weather in {city}</h3>
+        <p>Temperature: {latestWeather.temp}°C</p>
+        <p>Description: {latestWeather.weather.description}</p>
+
+      </div>
+    )}
  {movies && movies.length > 0 && (
       <div>
         <h3>Top 5 Movies Filmed in {city}</h3>

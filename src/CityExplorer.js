@@ -9,18 +9,16 @@ function CityExplorer() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [latestWeather, setLatestWeather] = useState(null);
-
-const [movies, setMovies] = useState([]);
-const getLatestWeatherData = async (lat, lon) => {
+ const getLatestWeatherData = async (lat, lon) => {
   try {
-    const weatherEndpoint = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${process.env.REACT_APP_WEATHERBIT_API_KEY}`;
+    const weatherEndpoint = `/.netlify/functions/getWeather?lat=${lat}&lon=${lon}`;
     const response = await axios.get(weatherEndpoint);
 
     if (response.status !== 200) {
       throw new Error('Failed to fetch weather data.');
     }
 
-    const weatherData = response.data.data[0];  // Weatherbit's current weather endpoint returns an array
+    const weatherData = response.data.data[0];
     setLatestWeather(weatherData);
   } catch (error) {
     console.error("Error fetching weather data:", error);

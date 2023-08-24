@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Weather from './Weather';
+import Weather from './weather';
 
 function CityExplorer() {
   const [city, setCity] = useState('');

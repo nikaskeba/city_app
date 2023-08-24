@@ -11,7 +11,8 @@ The CityExplorer application is designed to enable users to explore a city or la
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
-Technologies Used:
+
+<b>Technologies Used:</b>
 
 React: The core library for building the app's UI components.
 JavaScript (ES6 and above): Employs modern JavaScript features like async/await and arrow functions.

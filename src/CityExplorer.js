@@ -95,7 +95,7 @@ const getMoviesFilmedInCity = async () => {
       />
       <button onClick={handleExplore}>Explore!</button>
 
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+     
 
       {latitude && longitude && !errorMessage && (
         <div>
@@ -119,6 +119,7 @@ const getMoviesFilmedInCity = async () => {
       {weatherData && !errorMessage && (
         <Weather forecastData={weatherData} />
       )}
+       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 }

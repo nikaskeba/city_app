@@ -8,11 +8,28 @@ function CityExplorer() {
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [weatherData, setWeatherData] = useState(null);
+const [movies, setMovies] = useState([]);
+const getMoviesFilmedInCity = async () => {
+  try {
+    const movieEndpoint = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${city}`;
+    const response = await fetch(movieEndpoint);
 
+    if (!response.ok) {
+      throw new Error('Failed to fetch movies.');
+    }
+
+    const data = await response.json();
+    const top5Movies = data.results.slice(0, 5);
+    setMovies(top5Movies);
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+  }
+};
   const getWeatherData = async (lat, lon) => {
     try {
       const weatherEndpoint = `/weather?lat=${lat}&lon=${lon}&searchQuery=${city}`;
       const response = await fetch(weatherEndpoint);
+
 
       if (!response.ok) {
         throw new Error('Failed to fetch weather data.');
@@ -53,7 +70,8 @@ function CityExplorer() {
         const staticMapEndpoint = 'https://maps.locationiq.com/v3/staticmap';
         const staticMapUrl = `${staticMapEndpoint}?key=${apiKey}&center=${lat},${lon}&zoom=13&size=400x400&format=png`;
         setMapUrl(staticMapUrl);
-
+  // Fetch top 5 movies filmed in the city
+  getMoviesFilmedInCity();
         // Fetch the weather data
         getWeatherData(lat, lon);
       } else {
@@ -85,7 +103,16 @@ function CityExplorer() {
           {mapUrl && <img src={mapUrl} alt="Location Map" />}
         </div>
       )}
-
+ {movies && movies.length > 0 && (
+      <div>
+        <h3>Top 5 Movies Filmed in {city}</h3>
+        <ul>
+          {movies.map(movie => (
+            <li key={movie.id}>{movie.title}</li>
+          ))}
+        </ul>
+      </div>
+    )}
       {weatherData && !errorMessage && (
         <Weather forecastData={weatherData} />
       )}

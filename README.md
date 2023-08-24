@@ -12,32 +12,29 @@ The CityExplorer application is designed to enable users to explore a city or la
 
 ## Architecture
 
-<b>Technologies Used:</b>
-
-React: The core library for building the app's UI components.
-JavaScript (ES6 and above): Employs modern JavaScript features like async/await and arrow functions.
-Axios: A promise-based HTTP client used for making API requests.
-useState: React hook for reactive state management without class components.
-Weatherbit API: Fetches weather data for specified cities.
-LocationIQ API: Converts city names to coordinates and provides a static map image.
-TMDb API: Fetches movies associated with or filmed in a city.
-Application Flow:
-
-User Input: Users input a city or landmark.
-Fetching Location: The "Explore" button triggers an API call to LocationIQ for coordinates and map image.
-Fetching Weather: Uses coordinates to retrieve current weather from the Weatherbit API.
-Fetching Movies: Potentially retrieves movies related to the city from the TMDb API.
-Error Handling: Manages both user-level and technical errors, providing distinct messages for location and weather issues.
-User Interface:
-
-Search Bar: For city or landmark entry.
-Explore Button: Initiates the data retrieval process.
-Display Area: Showcases:
-City's latitude and longitude.
-City's static map image.
-Current weather details.
-(Potentially) a list of top movies related to the city.
-Error Messages: Provides user feedback on errors in red text.
+<b>Technologies Used:</b><br>
+React: The core library for building the app's UI components.<br>
+JavaScript (ES6 and above): Employs modern JavaScript features like async/await and arrow functions.<br>
+Axios: A promise-based HTTP client used for making API requests.<br>
+useState: React hook for reactive state management without class components.<br>
+Weatherbit API: Fetches weather data for specified cities.<br>
+LocationIQ API: Converts city names to coordinates and provides a static map image.<br>
+TMDb API: Fetches movies associated with or filmed in a city.<br>
+<b>Application Flow:</b><br>
+User Input: Users input a city or landmark.<br>
+Fetching Location: The "Explore" button triggers an API call to LocationIQ for coordinates and map image.<br>
+Fetching Weather: Uses coordinates to retrieve current weather from the Weatherbit API.<br>
+Fetching Movies: Potentially retrieves movies related to the city from the TMDb API.<br>
+Error Handling: Manages both user-level and technical errors, providing distinct messages for location and weather issues.<br>
+<b>User Interface:</b><br>
+Search Bar: For city or landmark entry.<br>
+Explore Button: Initiates the data retrieval process.<br>
+Display Area: Showcases:<br>
+City's latitude and longitude.<br>
+City's static map image.<br>
+Current weather details.<br>
+(Potentially) a list of top movies related to the city.<br>
+Error Messages: Provides user feedback on errors in red text.<br>
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 

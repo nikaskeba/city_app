@@ -119,9 +119,9 @@ const getMoviesFilmedInCity = async () => {
       {weatherData && !errorMessage && (
         <Weather forecastData={weatherData} />
       )}
-    
+    <div>
+       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}</div>
     </div>
-       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
   );
 }
 

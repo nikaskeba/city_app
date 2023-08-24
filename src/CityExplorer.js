@@ -54,7 +54,7 @@ const getMoviesFilmedInCity = async () => {
       }
 
       const data = await response.json();
-      setWeatherData(data);
+     
     } catch (error) {
       setErrorMessage(error.message);
       console.error("Error fetching weather data:", error);

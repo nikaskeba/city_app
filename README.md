@@ -38,14 +38,13 @@ Error Messages: Provides user feedback on errors in red text.<br>
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-08-22-2022
-Name of feature: Add initial ability to grab from own weather API
+08-23-2022
+Name of feature: Change weather function to be live. Add ability to show related movies to the city.
+Estimate of time needed to complete: 2.5 hours
 
-Estimate of time needed to complete: 1.5 hours
+Start time: 1 pm
 
-Start time: 2 pm
-
-Finish time: 6 pm
+Finish time: 5 pm
 
 Actual time needed to complete: 4 hours
 ## Credit and Collaborations

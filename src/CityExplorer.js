@@ -97,7 +97,7 @@ const getMoviesFilmedInCity = async () => {
 
      
 
-      {latitude && longitude (
+      {latitude && longitude && (
         <div>
           <p>Latitude: {latitude}</p>
           <p>Longitude: {longitude}</p>
@@ -119,8 +119,9 @@ const getMoviesFilmedInCity = async () => {
       {weatherData && !errorMessage && (
         <Weather forecastData={weatherData} />
       )}
-  {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+    
     </div>
+       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
   );
 }
 

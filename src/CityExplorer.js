@@ -43,8 +43,6 @@ const getMoviesFilmedInCity = async () => {
   }
 };
 
-  };
-
   const handleExplore = async () => {
     const searchEndpoint = 'https://us1.locationiq.com/v1/search.php'; 
     const apiKey = process.env.REACT_APP_LOCATIONIQ_API_KEY;
@@ -56,7 +54,7 @@ const getMoviesFilmedInCity = async () => {
         throw new Error('Unable to load. Authentication error.');
       }
 
-   
+      const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.error || 'Unable to load.');

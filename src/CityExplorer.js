@@ -27,20 +27,12 @@ const getLatestWeatherData = async (lat, lon) => {
 };
 const getMoviesFilmedInCity = async () => {
   try {
-    const movieEndpoint = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${city}`;
-    const response = await fetch(movieEndpoint);
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch movies.');
-    }
-
-    const data = await response.json();
-    const top5Movies = data.results.slice(0, 5);
-    setMovies(top5Movies);
+    const movieEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/.netlify/functions/getMovies?city=${city}`;
+    const response = await axios.get(movieEndpoint);
+    ...
   } catch (error) {
     console.error("Error fetching movies:", error);
   }
-};
 
   const handleExplore = async () => {
     const searchEndpoint = 'https://us1.locationiq.com/v1/search.php'; 
@@ -72,7 +64,8 @@ const getMoviesFilmedInCity = async () => {
   
 
         // Fetch top 5 movies filmed in the city
-  getMoviesFilmedInCity();
+
+    await getMoviesFilmedInCity();
       } else {
         throw new Error('No results found.');
       }

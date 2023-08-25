@@ -30,6 +30,9 @@ const getMoviesFilmedInCity = async () => {
     const movieEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/.netlify/functions/getMovies?city=${city}`;
     const response = await axios.get(movieEndpoint);
 
+    // Assuming the movie data is directly in the response data
+    setMovies(response.data);
+
   } catch (error) {
     console.error("Error fetching movies:", error);
   }

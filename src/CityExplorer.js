@@ -7,6 +7,7 @@ function CityExplorer() {
   const [longitude, setLongitude] = useState(null);
   const [mapUrl, setMapUrl] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+const [movies, setMovies] = useState([]);
 
   const [latestWeather, setLatestWeather] = useState(null);
  const getLatestWeatherData = async (lat, lon) => {

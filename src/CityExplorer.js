@@ -10,21 +10,7 @@ function CityExplorer() {
 const [movies, setMovies] = useState([]);
 
   const [latestWeather, setLatestWeather] = useState(null);
- const getLatestWeatherData = async (lat, lon) => {
-  try {
-    const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/.netlify/functions/getWeather?lat=${lat}&lon=${lon}`;
-    const response = await axios.get(weatherEndpoint);
 
-    if (response.status !== 200) {
-      throw new Error('Failed to fetch weather data.');
-    }
-
-    const weatherData = response.data.data[0];
-    setLatestWeather(weatherData);
-  } catch (error) {
-    console.error("Error fetching weather data:", error);
-  }
-};
 const getMoviesFilmedInCity = async () => {
   try {
     const movieEndpoint = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${city}`;
@@ -70,6 +56,19 @@ const getMoviesFilmedInCity = async () => {
         const staticMapUrl = `${staticMapEndpoint}?key=${apiKey}&center=${lat},${lon}&zoom=13&size=400x400&format=png`;
         setMapUrl(staticMapUrl);
   
+
+    const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/.netlify/functions/getWeather?lat=${lat}&lon=${lon}`;
+    const response = await axios.get(weatherEndpoint);
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch weather data.');
+    }
+
+    const weatherData = response.data.data[0];
+    setLatestWeather(weatherData);
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+  }
 
         // Fetch top 5 movies filmed in the city
   getMoviesFilmedInCity();

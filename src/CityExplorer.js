@@ -66,9 +66,7 @@ const getMoviesFilmedInCity = async () => {
 
     const weatherData = response.data.data[0];
     setLatestWeather(weatherData);
-  } catch (error) {
-    console.error("Error fetching weather data:", error);
-  }
+ 
 
         // Fetch top 5 movies filmed in the city
   getMoviesFilmedInCity();

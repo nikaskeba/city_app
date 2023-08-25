@@ -12,7 +12,7 @@ const [movies, setMovies] = useState([]);
   const [latestWeather, setLatestWeather] = useState(null);
  const getLatestWeatherData = async (lat, lon) => {
   try {
-    const weatherEndpoint = `/.netlify/functions/getWeather?lat=${lat}&lon=${lon}`;
+    const weatherEndpoint = `https://exquisite-starlight-bb4f7d.netlify.app/.netlify/functions/getWeather?lat=${lat}&lon=${lon}`;
     const response = await axios.get(weatherEndpoint);
 
     if (response.status !== 200) {

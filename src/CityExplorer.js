@@ -33,7 +33,7 @@ const getMoviesFilmedInCity = async () => {
   } catch (error) {
     console.error("Error fetching movies:", error);
   }
-
+};
   const handleExplore = async () => {
     const searchEndpoint = 'https://us1.locationiq.com/v1/search.php'; 
     const apiKey = process.env.REACT_APP_LOCATIONIQ_API_KEY;
